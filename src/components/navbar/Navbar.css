@@ -1,0 +1,13 @@
+.barraIMP{
+    margin-bottom: 40px !important;
+    height: 30% !important;
+}
+
+.divSEARCH{
+    display: inline-block;
+    width: 60%;
+}
+.divDATA{
+    display: inline-block;
+    width: 40%;
+}

@@ -1,0 +1,21 @@
+.carte {
+    width: 18rem !important;
+    border: 1px solid black !important;
+    border-radius: 30px !important;
+    margin: 20px !important;
+}
+
+.carte:hover {
+    cursor: pointer;
+}
+
+.carteIMG{
+    width: 100% !important;
+    borderRadius: 30px !important;
+    marginTop: 10px !important;
+    variant: top !important;
+    height: 20rem !important;
+
+}
+
+
