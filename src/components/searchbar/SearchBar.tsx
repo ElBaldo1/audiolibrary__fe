@@ -72,16 +72,17 @@ function SearchBar () {
         <div className="d-flex">
             <input className="form-control me-2"
                    name="search" value={campoTitolo} onChange={manageSearch}
-                   type="search" placeholder="Search (min 3 characters)" aria-label="Search"/>
+                   type="search" placeholder="Ricerca (min 3 caratteri)" aria-label="Search"/>
             <DatePicker onChangeDate={onSearchDateChange}/>
-            <button onClick={onclickSearch} className="btn btn-outline-info" type="submit">Search</button>
+            <button onClick={onclickSearch} className="btn btn-outline-info" type="submit">Ricerca</button>
             <button onClick={() => {
                 setCampiRicerca({
                     tipo: pageType
                 })
                 setCampoTitolo('');
-
-            }} className="btn btn-outline-info" type="reset">Reset
+                dispatch(audiolibroAction.getAudiobooksbyUserList())
+            }
+            } className="btn btn-outline-info" type="reset">Reset
             </button>
         </div>);
 }

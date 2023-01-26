@@ -104,7 +104,8 @@ function AudiobooksList () {
                     (
                         <div data-testid='audiobooksList'>
                             <Navbar/>
-                            <h4 style={{ position:'relative', textAlign:'center', marginTop:'10%' }}> Benvenuto {utente?.username} </h4>
+                            <h4 style={{ position:'relative', textAlign:'center', marginTop:'20%' }}> Benvenuto {utente?.username} </h4>
+
                             <div className='row d-flex justify-content-center'>
                                 {
                                     audiobooks.map((audiobook, index) => <AudiobookItem  key={index}
@@ -124,12 +125,18 @@ function AudiobooksList () {
                                 {favouriteButton()}
                                 {buttonCondivisione()}
                             </div>
-                            <AudioBooksDetails audiobook={audiobooksSelected}/><Button variant="primary" onClick={() => {
-                            const id: RequestAudiolibroModifica = {
-                                idAudiolibro: audiobooksSelected?.idAudiolibro
-                            };
-                            dispatch(audiolibroAction.eliminazioneAudiolibro(id));
-                        }}>Rimuovi audiobook</Button>
+                            <AudioBooksDetails audiobook={audiobooksSelected}/>
+
+                            {utente?.username=== audiobooksSelected?.creatore?.username  &&
+                                <Button variant="primary" onClick={() => {
+                                    const id: RequestAudiolibroModifica = {
+                                        idAudiolibro: audiobooksSelected?.idAudiolibro
+                                    };
+                                    dispatch(audiolibroAction.eliminazioneAudiolibro(id));
+                                }}>Rimuovi audiobook
+                                </Button>
+                            }
+
                         </>
                     ) : (
                         <><Back onClick={() => setMenuModificaCondivisione(false)}/><MenuModificaCondivisione audioLibro={audiobooksSelected}/></>

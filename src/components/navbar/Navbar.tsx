@@ -6,6 +6,7 @@ import './Navbar.css';
 
 function Navbar () {
 
+
     // questo componente carica il menu, la searchbar e il datepicker
 
     return (
