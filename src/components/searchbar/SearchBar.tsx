@@ -35,10 +35,8 @@ function SearchBar () {
                 message: 'Inserire almeno un campo di ricerca',
                 type: ToastType.ERROR
             }));
-
             return;
         }
-
         dispatch(audiolibroAction.ricercaAudiolibro(campiRicerca));
     }
 
@@ -64,11 +62,7 @@ function SearchBar () {
         onSearchTitoloChange(s);
     }
 
-
-
     return (
-
-
         <div className="d-flex">
             <input className="form-control me-2"
                    name="search" value={campoTitolo} onChange={manageSearch}

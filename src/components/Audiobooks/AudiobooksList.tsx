@@ -57,7 +57,7 @@ function AudiobooksList () {
                 </Alert>;
             } else if (pageType === PageType.NETWORKPAGE) {
                 return <Alert key="secondary" variant="secondary">
-                    <Alert.Heading>Non hai ancora aggiunto nessun audiolibro alla rete</Alert.Heading>
+                    <Alert.Heading>Non hai ancora nessun audiolibro nella tua rete</Alert.Heading>
                 </Alert>;
             } else if (pageType === PageType.SEARCHPAGE) {
                 return <Alert key="secondary" variant="secondary">
@@ -115,8 +115,9 @@ function AudiobooksList () {
                                 }
                             </div>
                             {testoSeListaVuota()}
-                            <Button data-testid='buttonAggiuntaAudiobook' variant="primary" onClick={() => navigate('/addAudiobook')}>Aggiungi un nuovo
-                                audiobook</Button>
+                            {pageType===PageType.HOMEPAGE  && <Button data-testid='buttonAggiuntaAudiobook' variant="primary"
+                                     onClick={() => navigate('/addAudiobook')}>Aggiungi un nuovo
+                                audiobook</Button>}
                         </div>
                     ) :(!showMenuModificaCondivisione) ? (
                         <>

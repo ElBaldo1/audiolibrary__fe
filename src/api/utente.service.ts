@@ -13,7 +13,14 @@ export const utente_login = (credentials: RequestUtenteLogin) : Promise<AxiosRes
 
 // questa funzione è chiamata quando si vuole registrarsi comunicando con il backend
 export const utente_registrazione = (newUser:RequestUtenteRegistrazione):Promise<AxiosResponse<ResponseUtente>> => {
-    return axios.post('http://localhost:8080/utente/registrazione',newUser );
+    return axios.post('http://localhost:8080/utente/registrazione',newUser ,
+    {
+        headers: {
+            'Content-Type': 'application/json',
+                'Authorization': 'Bearer '
+        }
+    }
+);
 }
 
 // questa funzione è chiamata quando si vuole fare il logout comunicando con il backend

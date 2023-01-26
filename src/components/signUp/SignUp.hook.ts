@@ -13,7 +13,6 @@ export const useSignup = (dto?: RequestUtenteRegistrazione) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [data, setData] = useState<ResponseUtente>();
 
-
     // quando cambia il dto in ingresso, lui fa la chiamata
     useEffect(() => {
         const fetch = async () => {
@@ -26,10 +25,9 @@ export const useSignup = (dto?: RequestUtenteRegistrazione) => {
                     dispatch(toastActions.showToast({message: 'Registrazione avvenuta con successo', type: ToastType.SUCCESS}));
                 }
             } catch (e) {
-                const {response} = e as AxiosError
+                const {response} = e as AxiosError;
                 if (response && response.data) {
-                    const errData = response.data as { message: string }
-                   dispatch(toastActions.showToast({message: errData.message, type: ToastType.ERROR}))
+                    dispatch(toastActions.showToast({message: response?.data, type: ToastType.ERROR}));
                 }
             } finally {
                 setIsLoading(false);
