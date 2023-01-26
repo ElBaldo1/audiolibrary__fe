@@ -85,7 +85,7 @@ function Login () {
                         </Button>
                     </div>
                     <p className="forgot-password text-right mt-2">
-                        Non hai account?<Link to="signUp">Registrati</Link>
+                        Non hai account?<Link to="/signUp" >Registrati</Link>
                     </p>
                 </div>
             </div>
