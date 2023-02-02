@@ -274,5 +274,35 @@ export const audiolibroReducer = {
                     audioBooks
                 }
             })
+            .addCase(audiolibroAction.modificaAudiolibroAction.fulfilled, (state, action) => {
+                const audioBooks = state.audioBooks.map((item) => {
+                    if(item.idAudiolibro === action.payload.idAudiolibro){
+                        return {
+                            ...item,
+                            titolo: action.payload.titolo,
+                            descrizione: action.payload.descrizione,
+                            copertina: 'data:image/png;base64,' + action.payload.copertina,
+                        }
+                    }
+                    return item
+                })
+                return {
+                    ...state,
+                    loading: false,
+                    audioBooks
+                }
+            })
+            .addCase(audiolibroAction.modificaAudiolibroAction.pending, (state, ) => {
+                return {
+                    ...state,
+                    loading: true,
+                }
+            })
+            .addCase(audiolibroAction.modificaAudiolibroAction.rejected, (state, ) => {
+                return {
+                    ...state,
+                    loading: false,
+                }
+            })
     })
 }

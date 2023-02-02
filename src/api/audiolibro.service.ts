@@ -3,7 +3,7 @@ import {
     RequestAudiolibroAscolta,
     RequestAudiolibroCondivisione,
     RequestAudiolibroInserisci,
-    RequestAudiolibroModifica,
+    RequestAudiolibroModifica, RequestAudiolibroModificaCampi,
     RequestAudiolibroRicerca
 } from 'model/requestDTO';
 import {ResponseAudiolibro} from 'model/responseDTO';
@@ -69,6 +69,17 @@ return axios.patch<ResponseAudiolibro>('http://localhost:8080/audiolibro/rimuovi
 // questa funzione elimina un audiobook comunicando con il backend
 export const eliminaAudiolibro = (idAudiolibro: RequestAudiolibroModifica): Promise<AxiosResponse<ResponseAudiolibro>> => {
     return axios.post<ResponseAudiolibro>('http://localhost:8080/audiolibro/rimuovi', idAudiolibro,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        });
+}
+
+// questa funzione modifica i dati di un audiobook comunicando con il backend
+export const modificaAudiolibro = (requestAudiolibroModifica: RequestAudiolibroModificaCampi): Promise<AxiosResponse<ResponseAudiolibro>> => {
+    return axios.patch<ResponseAudiolibro>('http://localhost:8080/audiolibro/modifica', requestAudiolibroModifica,
         {
             headers: {
                 'Content-Type': 'application/json',

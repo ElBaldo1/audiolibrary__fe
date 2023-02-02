@@ -67,7 +67,7 @@ function AddAudiobook () {
         <div data-testid='formAggiuntaAudiolibro' className="Auth-form-container">
             <form className="Auth-form">
                 <div className="Auth-form-content">
-                    <h3 className="Auth-form-title">Add new audiobook</h3>
+                    <h3 className="Auth-form-title">Aggiungi nuovo audiolibro</h3>
                     <div className="form-group mt-3">
                         <label>Titolo</label>
                         <input

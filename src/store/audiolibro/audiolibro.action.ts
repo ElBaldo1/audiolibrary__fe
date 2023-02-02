@@ -1,16 +1,20 @@
-import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
+import {createAsyncThunk} from '@reduxjs/toolkit';
 import {
     aggiungiAudiolibro,
-    aggiungiAudiolibroPreferiti, audiolibroFineAscolto,
+    aggiungiAudiolibroPreferiti,
+    audiolibroFineAscolto,
     eliminaAudiolibro,
     listaAudiolibri,
-    ricercaAudiolibri, rimuoviAudiolibroPreferiti
+    modificaAudiolibro,
+    ricercaAudiolibri,
+    rimuoviAudiolibroPreferiti
 } from 'api/audiolibro.service';
 import {AxiosError} from 'axios';
 import {
     RequestAudiolibroAscolta,
     RequestAudiolibroInserisci,
     RequestAudiolibroModifica,
+    RequestAudiolibroModificaCampi,
     RequestAudiolibroRicerca
 } from 'model/requestDTO';
 import {ResponseAudiolibro} from 'model/responseDTO';
@@ -116,6 +120,21 @@ const eliminazioneAudiolibro=createAsyncThunk(
     }
 );
 
+const modificaAudiolibroAction=createAsyncThunk(
+    '/modificaAudiolibro',
+    async (requestAudiolibroModifica:RequestAudiolibroModificaCampi,thunkAPI):Promise<ResponseAudiolibro>=>{
+        try {
+            const response = await modificaAudiolibro(requestAudiolibroModifica);
+            thunkAPI.dispatch(toastActions.showToast({message: 'Audiolibro modificato con successo', type: ToastType.SUCCESS}));
+            return response.data;
+        }   catch (e) {
+            const error = e as AxiosError;
+            thunkAPI.dispatch(toastActions.showToast({message: error.response?.data, type: ToastType.ERROR}));
+            throw e;
+        }
+    }
+);
+
 // questa action è chiamata quando l'utente vuole aggiungere un audiolibro ai preferiti
 const aggiungiAudiolibroPreferito=createAsyncThunk(
     '/aggiungiAudiolibroPreferito',
@@ -183,5 +202,6 @@ export const audiolibroAction={
     aggiungiAudiolibroPreferito,
     rimuoviAudiolibroPreferito,
     fineAscolto,
-    changeVisibility
+    changeVisibility,
+    modificaAudiolibroAction
 }

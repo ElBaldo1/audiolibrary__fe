@@ -19,6 +19,12 @@ export interface RequestUtenteLogout{
     jwtToken:string;
 }
 
+export interface RequestUtenteModifica{
+    email:string;
+    username:string;
+    password:string;
+}
+
 
 //request DTO audiolibro
 
@@ -42,6 +48,13 @@ export interface RequestAudiolibroRicerca{
 
 export interface RequestAudiolibroModifica{
     idAudiolibro: number;
+}
+
+export interface RequestAudiolibroModificaCampi{
+    idAudiolibro: number;
+    titolo: string;
+    descrizione: string;
+    copertina: string;
 }
 
 export interface RequestAudiolibroCondivisione{

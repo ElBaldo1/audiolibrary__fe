@@ -1,5 +1,6 @@
 import AddAudiobook from 'components/addAudiobook/AddAudiobook';
 import Login from 'components/login/Login';
+import ModificaUtente from 'components/modificaUtente/ModificaUtente';
 import PageBooks from 'components/pageBooks/PageBooks';
 import SignUp from 'components/signUp/SignUp';
 import React from 'react';
@@ -18,6 +19,7 @@ function App() {
                 <Route path="signUp" element={ <SignUp/> } />
                 <Route path="home" element={<PageBooks/> }/>
                 <Route path="addAudiobook" element={<AddAudiobook/> }/>
+                <Route path="modificaUtente" element={<ModificaUtente/> }/>
             </Routes>
         </>
     );

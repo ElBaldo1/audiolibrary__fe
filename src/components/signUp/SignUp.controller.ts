@@ -16,10 +16,6 @@ export const utenteRegistrazioneController=(requestUtenteRegistrazione:RequestUt
         correct=false;
         alert('errore, email non valida');
     }
-    //todo regex
-/*    if (requestUtenteRegistrazione.password.length<8){
-        correct=false;
-        alert('errore,password troppo corta');
-    }*/
+
     return correct;
 }

@@ -20,8 +20,13 @@ function Popup () {
     const handleShow = () => setShow(true);
     const loading=useSelector(authSelector.loading);
     const error=useSelector(authSelector.error);
+    const linkToModificaUtente=()=>{
+        navigate('/modificaUtente');
+    }
     return (
         <>
+            <Button style={{marginRight:'10px'}} variant="warning" onClick={linkToModificaUtente}>Utente
+            </Button>
             <Button data-testid='buttonLogout' variant="warning" onClick={handleShow}>
                 LOGOUT
             </Button>

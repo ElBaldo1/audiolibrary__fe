@@ -1,4 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
+import {ResponseUtenteLogin} from 'model/responseDTO';
 import {authAction} from 'store/authentication/auth.action';
 import {AuthState} from 'store/authentication/types';
 
@@ -56,13 +57,42 @@ export const authReducer = {
                     }
                 )
                 .addCase(authAction.logoutUser.fulfilled, (state) => {
+                    return {
+                        ...state,
+                        responseUtenteLogin: undefined,
+                        loading: false,
+                        error: false
+                    }
+                })
+                .addCase(authAction.modificaUser.rejected, (state) => {
                         return {
                             ...state,
-                            responseUtenteLogin: undefined,
+                            error: true,
+                            loading: false
+                        }
+                    }
+                )
+                .addCase(authAction.modificaUser.pending, (state) => {
+                        return {
+                            ...state,
+                            loading: true,
+                            error: false
+                        }
+                    }
+                )
+                .addCase(authAction.modificaUser.fulfilled, (state, action) => {
+                    const responseUtenteLoginModificato:ResponseUtenteLogin = {
+                        ...state.responseUtenteLogin!,
+                        utente: action.payload,
+                    }
+                    return {
+                            ...state,
+                            responseUtenteLogin: responseUtenteLoginModificato,
                             loading: false,
                             error: false
                         }
-                    })
+                    }
+                )
         }
     )
 }

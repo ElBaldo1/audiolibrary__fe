@@ -1,13 +1,9 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {utente_login, utente_logout} from 'api/utente.service';
+import {utente_login, utente_logout, utente_modifica} from 'api/utente.service';
 import {deleteToken} from 'api/utils';
 import {AxiosError} from 'axios';
-import {
-    RequestUtenteLogin,
-    RequestUtenteLogout,
-
-} from 'model/requestDTO';
-import {ResponseUtenteLogin} from 'model/responseDTO';
+import {RequestUtenteLogin, RequestUtenteLogout, RequestUtenteModifica,} from 'model/requestDTO';
+import {ResponseUtente, ResponseUtenteLogin} from 'model/responseDTO';
 import {utenteLoginController} from 'store/authentication/auth.controller';
 import {toastActions} from 'store/toastr/toast.action';
 import {ToastType} from 'store/toastr/types';
@@ -51,7 +47,25 @@ const logoutUser = createAsyncThunk(
     }
 )
 
+const modificaUser= createAsyncThunk(
+    '/modifica',
+    async (requestUtenteModifica: RequestUtenteModifica, thunkAPI): Promise<ResponseUtente> => {
+        try {
+            const response = await utente_modifica(requestUtenteModifica);
+            localStorage.setItem('user', JSON.stringify(response.data));
+            thunkAPI.dispatch(toastActions.showToast({message: "Modifica effettuata con successo", type: ToastType.SUCCESS}));
+            return response.data;
+        } catch (e) {
+            const error = e as AxiosError;
+            thunkAPI.dispatch(toastActions.showToast({message: error.response?.data, type: ToastType.ERROR}));
+            throw e;
+        }
+    }
+)
+
+
 export const authAction = {
     loginUser,
     logoutUser,
+    modificaUser
 }
