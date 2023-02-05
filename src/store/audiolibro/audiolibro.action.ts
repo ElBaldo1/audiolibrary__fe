@@ -124,12 +124,14 @@ const modificaAudiolibroAction=createAsyncThunk(
     '/modificaAudiolibro',
     async (requestAudiolibroModifica:RequestAudiolibroModificaCampi,thunkAPI):Promise<ResponseAudiolibro>=>{
         try {
+            debugger
             const response = await modificaAudiolibro(requestAudiolibroModifica);
             thunkAPI.dispatch(toastActions.showToast({message: 'Audiolibro modificato con successo', type: ToastType.SUCCESS}));
             return response.data;
         }   catch (e) {
             const error = e as AxiosError;
-            thunkAPI.dispatch(toastActions.showToast({message: error.response?.data, type: ToastType.ERROR}));
+            //todo gestire errore
+            thunkAPI.dispatch(toastActions.showToast({message: error.message, type: ToastType.ERROR}));
             throw e;
         }
     }
@@ -141,7 +143,6 @@ const aggiungiAudiolibroPreferito=createAsyncThunk(
     async (idAudiolibro:RequestAudiolibroModifica,thunkAPI):Promise<ResponseAudiolibro>=>{
         try {
             const response = await aggiungiAudiolibroPreferiti(idAudiolibro);
-            debugger;
             thunkAPI.dispatch(toastActions.showToast({message: 'Audiolibro aggiunto ai preferiti', type: ToastType.SUCCESS}));
             return response.data;
         }   catch (e) {

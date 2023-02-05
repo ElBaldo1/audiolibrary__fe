@@ -17,16 +17,12 @@ function ModificaUtente () {
     const dispatch = useAppDispatch();
     const isLoading=useSelector(authSelector.loading);
     const navigate=useNavigate();
-    const userActual=useSelector(authSelector.userLogged);
     const [modificaUser, setModificaUser] = useState<RequestUtenteModifica>({
         email: '',
         password: '',
         username: ''
     });
     const [confirmPassword, setConfirmPassword] = useState<string>('');
-/*    useEffect(() => {
-
-    }, [input]);*/
 
 
     const onClickModify = () => {
@@ -46,11 +42,26 @@ function ModificaUtente () {
 
     return (
         <>
-            <div style={{marginLeft:'47%', position:'absolute',marginTop:'8%'}}><Back  onClick={()=>navigate('/home')} /> </div>
+            <div style={{marginLeft:'47%', position:'absolute',marginTop:'7%'}}><Back  onClick={()=>navigate('/home')} /> </div>
             <div data-testid='popupLogout' className="Auth-form-container">
                 <div className="Auth-form">
                     <div className="Auth-form-content">
                         <h3 className="Auth-form-title">Modifica utente</h3>
+                        <h5>Inserire solo i dati da modificare</h5>
+                        <div className="form-group mt-3">
+                            <label>Username</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Username"
+                                required={true}
+                                value={modificaUser.username}
+                                onChange={(e) => setModificaUser({
+                                    ...modificaUser,
+                                    username: e.target.value
+                                })}
+                            />
+                        </div>
 
                         <div className="form-group mt-3">
                             <label>Indirizzo e-mail</label>

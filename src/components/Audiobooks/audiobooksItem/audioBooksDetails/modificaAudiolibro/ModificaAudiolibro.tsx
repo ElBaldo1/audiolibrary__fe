@@ -54,6 +54,11 @@ function ModificaAudiolibro (props:ModificaAudiolibroProps) {
         };
     };
 
+    useEffect(() => {
+        console.log('<<',audiobookModifica);
+    }, [audiobookModifica]);
+
+
     return (
         (!checkAuth) ? <></> :
             <>
@@ -103,6 +108,7 @@ function ModificaAudiolibro (props:ModificaAudiolibroProps) {
 
                             <div className="d-grid gap-2 mt-3">
                                 <Button  type="submit" className="btn btn-primary" variant="warning" onClick={() => {
+                                    debugger;
                                     if(modificaAudiolibroController(audiobookModifica)) {
                                         dispatch(audiolibroAction.modificaAudiolibroAction(audiobookModifica))
                                     }

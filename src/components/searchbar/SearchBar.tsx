@@ -49,18 +49,8 @@ function SearchBar () {
         })
     }, [pageType]);
 
-    useEffect(() => {
-        debugger;
-        console.log('<<c',campoTitolo);
-    }, [campoTitolo]);
-
-
-
-
-
     // serve per far partire la ricerca
     const onclickSearch = () => {
-        debugger;
         if (!campiRicerca.titolo && !campiRicerca.dataInserimento) {
             dispatch(toastActions.showToast({
                 message: 'Inserire almeno un campo di ricerca',
