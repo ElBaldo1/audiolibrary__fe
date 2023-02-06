@@ -5,6 +5,9 @@ import {Spinner} from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
+import {audiolibroAction} from 'store/audiolibro/audiolibro.action';
+import {audiolibroSelector} from 'store/audiolibro/audiolibro.selector';
+import {PageType} from 'store/audiolibro/types';
 import {authAction} from 'store/authentication/auth.action';
 import {regexEmail} from 'store/authentication/auth.controller';
 import {authSelector} from 'store/authentication/auth.selector';
@@ -15,6 +18,7 @@ import {ToastType} from 'store/toastr/types';
 function ModificaUtente () {
     const dispatch = useAppDispatch();
     const isLoading=useSelector(authSelector.loading);
+    const pageType= useSelector(audiolibroSelector.page);
     const navigate=useNavigate();
     const [modificaUser, setModificaUser] = useState<RequestUtenteModifica>({
         email: '',
@@ -24,7 +28,7 @@ function ModificaUtente () {
     const [confirmPassword, setConfirmPassword] = useState<string>('');
 
 
-    const onClickModify = () => {
+    const onClickModify = async () => {
         if (modificaUser.password!=="" && modificaUser.password !== confirmPassword) {
             dispatch(toastActions.showToast({message: 'Password non corrispondono', type: ToastType.ERROR}));
             return;
@@ -34,19 +38,36 @@ function ModificaUtente () {
             return;
         }
         if (modificaUser.password === confirmPassword && regexEmail(modificaUser.email)) {
-            dispatch(authAction.modificaUser(modificaUser));
+             await dispatch(authAction.modificaUser(modificaUser));
+            await dispatchModificaUtente();
             return;
         }
 
         if (modificaUser.password==="" && modificaUser.email==="" && modificaUser.username!==""){
-            dispatch(authAction.modificaUser(modificaUser));
+             await dispatch(authAction.modificaUser(modificaUser));
+            await dispatchModificaUtente();
             return;
         }
         if (modificaUser.password==="" && modificaUser.email==="" && modificaUser.username===""){
-            dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
+            await dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
             return;
         }
+         await dispatch(audiolibroAction.getAudiobooksbyUserList());
+        await dispatchModificaUtente();
+
     };
+
+    const dispatchModificaUtente = async () => {
+        debugger
+        if (pageType===PageType.FAVOURITEPAGE){
+            await dispatch(audiolibroAction.getFavuoritesAudiobookByUserList);
+        }
+        else if (pageType===PageType.NETWORKPAGE){
+            await dispatch(audiolibroAction.getPublicAudiobookList);
+        } else {
+            await dispatch(audiolibroAction.getAudiobooksbyUserList);
+        }
+    }
 
     return (
         <>

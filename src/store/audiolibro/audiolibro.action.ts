@@ -127,11 +127,12 @@ const modificaAudiolibroAction=createAsyncThunk(
             debugger
             const response = await modificaAudiolibro(requestAudiolibroModifica);
             thunkAPI.dispatch(toastActions.showToast({message: 'Audiolibro modificato con successo', type: ToastType.SUCCESS}));
+            thunkAPI.dispatch(getAudiobooksbyUserList());
             return response.data;
         }   catch (e) {
             const error = e as AxiosError;
             //todo gestire errore
-            thunkAPI.dispatch(toastActions.showToast({message: error.message, type: ToastType.ERROR}));
+            thunkAPI.dispatch(toastActions.showToast({message: error.response?.data, type: ToastType.ERROR}));
             throw e;
         }
     }

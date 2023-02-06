@@ -1,10 +1,9 @@
 import {getToken, getUser} from 'api/utils';
 import AudiobookItem from 'components/Audiobooks/audiobooksItem/AudiobookItem';
 import AudioBooksDetails from 'components/Audiobooks/audiobooksItem/audioBooksDetails/audioBooksDetails';
-import ModificaAudiolibro
-    from 'components/Audiobooks/audiobooksItem/audioBooksDetails/modificaAudiolibro/ModificaAudiolibro';
 import Back from 'components/back/Back';
 import MenuModificaCondivisione from 'components/menuModificaCondivisione/MenuModificaCondivisione';
+import ModificaAudiolibro from 'components/modificaAudiolibro/ModificaAudiolibro';
 import Navbar from 'components/navbar/Navbar';
 import {Spinner} from 'components/spinner/spinner';
 import {RequestAudiolibroModifica} from 'model/requestDTO';
@@ -160,7 +159,10 @@ function AudiobooksList () {
 
                             </>
                         ) :  (
-                            <><Back onClick={() => setMenuModificaCondivisione(false)}/><MenuModificaCondivisione audioLibro={audiobooksSelected}/></>
+                            <><Back onClick={() => setMenuModificaCondivisione(false)}/><MenuModificaCondivisione onChange={() => {
+                                setAudiobooksSelected(null);
+                                setMenuModificaCondivisione(false);
+                            }} audioLibro={audiobooksSelected}/></>
                         )
 
     );

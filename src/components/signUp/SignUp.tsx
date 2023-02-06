@@ -49,6 +49,23 @@ function SignUp () {
             <div className="Auth-form">
                 <div className="Auth-form-content">
                     <h3 className="Auth-form-title">Registrazione</h3>
+
+                    <div className="form-group mt-3">
+                        <label>Username</label>
+                        <p style={{color:'blue'}}>Il seguente campo sarà immutabile</p>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Username"
+                            required={true}
+                            value={newUser.username}
+                            onChange={(e) => setNewUser({
+                                ...newUser,
+                                username: e.target.value
+                            })}
+                        />
+                    </div>
+
                     <div className="form-group mt-3">
                         <label>Nome</label>
                         <input
@@ -75,21 +92,6 @@ function SignUp () {
                             onChange={(e) => setNewUser({
                                 ...newUser,
                                 cognome: e.target.value
-                            })}
-                        />
-                    </div>
-
-                    <div className="form-group mt-3">
-                        <label>Username</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Username"
-                            required={true}
-                            value={newUser.username}
-                            onChange={(e) => setNewUser({
-                                ...newUser,
-                                username: e.target.value
                             })}
                         />
                     </div>

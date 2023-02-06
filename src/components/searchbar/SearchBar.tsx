@@ -88,7 +88,7 @@ function SearchBar () {
         <div className="d-flex">
             <input className="form-control me-2"
                    name="search" value={campoTitolo} onChange={manageSearch}
-                   type="search" placeholder="Ricerca (min 3 caratteri)" aria-label="Search"/>
+                   type="search" placeholder="Ricerca titolo" aria-label="Search"/>
             <DatePicker onChangeDate={onSearchDateChange}/>
             <button onClick={onclickSearch} className="btn btn-outline-info" type="submit">Ricerca</button>
             <button onClick={() => {

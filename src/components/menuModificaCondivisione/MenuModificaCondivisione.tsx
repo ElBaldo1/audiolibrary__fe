@@ -20,6 +20,7 @@ import {ToastType} from 'store/toastr/types';
 
 export interface MenuModificaCondivisioneProps {
     audioLibro: ResponseAudiolibro;
+    onChange: () => void
 }
 
 function MenuModificaCondivisione (props: MenuModificaCondivisioneProps) {
@@ -28,7 +29,6 @@ function MenuModificaCondivisione (props: MenuModificaCondivisioneProps) {
     const [textInputAggiunta, setTextInputAggiunta] = useState<string>('');
     const [textInputRimozione, setTextInputRimozione] = useState<string>('');
     const [isPublic, setIsPublic] = useState(audioLibro.pubblico);
-
     // questa funzione rende l'audiolibro non pubblico e richiama l'api
     const makeNonPubblico = () => {
         const dto: RequestAudiolibroModifica = {
@@ -42,6 +42,7 @@ function MenuModificaCondivisione (props: MenuModificaCondivisioneProps) {
                     message: 'Audiolibro reso privato',
                     type: ToastType.SUCCESS
                 }));
+                props.onChange();
             }
         }).catch((error) => {
             // Quando va in errore
@@ -64,6 +65,7 @@ function MenuModificaCondivisione (props: MenuModificaCondivisioneProps) {
                     message: 'Audiolibro reso pubblico',
                     type: ToastType.SUCCESS
                 }));
+                props.onChange();
             }
         }).catch((error) => {
             // Quando va in errore
