@@ -21,7 +21,6 @@ export interface RequestUtenteLogout{
 
 export interface RequestUtenteModifica{
     email:string;
-    username:string;
     password:string;
 }
 

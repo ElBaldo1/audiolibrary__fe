@@ -22,8 +22,7 @@ function ModificaUtente () {
     const navigate=useNavigate();
     const [modificaUser, setModificaUser] = useState<RequestUtenteModifica>({
         email: '',
-        password: '',
-        username: ''
+        password: ''
     });
     const [confirmPassword, setConfirmPassword] = useState<string>('');
 
@@ -43,12 +42,12 @@ function ModificaUtente () {
             return;
         }
 
-        if (modificaUser.password==="" && modificaUser.email==="" && modificaUser.username!==""){
+        if (modificaUser.password==="" && modificaUser.email===""){
              await dispatch(authAction.modificaUser(modificaUser));
             await dispatchModificaUtente();
             return;
         }
-        if (modificaUser.password==="" && modificaUser.email==="" && modificaUser.username===""){
+        if (modificaUser.password==="" && modificaUser.email===""){
             await dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
             return;
         }
@@ -77,21 +76,6 @@ function ModificaUtente () {
                     <div className="Auth-form-content">
                         <h3 className="Auth-form-title">Modifica utente</h3>
                         <h5>Inserire solo i dati da modificare</h5>
-                        <div className="form-group mt-3">
-                            <label>Username</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Username"
-                                required={true}
-                                value={modificaUser.username}
-                                onChange={(e) => setModificaUser({
-                                    ...modificaUser,
-                                    username: e.target.value
-                                })}
-                            />
-                        </div>
-
                         <div className="form-group mt-3">
                             <label>Indirizzo e-mail</label>
                             <input
