@@ -1,5 +1,4 @@
 import Back from 'components/back/Back';
-import {utenteModificaController} from 'components/modificaUtente/ModificaUtente.controller';
 import {RequestUtenteModifica} from 'model/requestDTO';
 import React, {useState} from 'react';
 import {Spinner} from 'react-bootstrap';
@@ -26,17 +25,26 @@ function ModificaUtente () {
 
 
     const onClickModify = () => {
-        if (modificaUser.password === confirmPassword) {
-            if (regexEmail(modificaUser.email)) {
-                // qui chiamata al controller FE
-                if(utenteModificaController(modificaUser)) {
-                    dispatch(authAction.modificaUser(modificaUser));
-                }
-            } else {
-                dispatch(toastActions.showToast({message: 'Email non valida', type: ToastType.ERROR}));
-            }
-        } else {
+        if (modificaUser.password!=="" && modificaUser.password !== confirmPassword) {
             dispatch(toastActions.showToast({message: 'Password non corrispondono', type: ToastType.ERROR}));
+            return;
+        }
+        if(modificaUser.email!=="" && !regexEmail(modificaUser.email)){
+            dispatch(toastActions.showToast({message: 'Email non valida', type: ToastType.ERROR}));
+            return;
+        }
+        if (modificaUser.password === confirmPassword && regexEmail(modificaUser.email)) {
+            dispatch(authAction.modificaUser(modificaUser));
+            return;
+        }
+
+        if (modificaUser.password==="" && modificaUser.email==="" && modificaUser.username!==""){
+            dispatch(authAction.modificaUser(modificaUser));
+            return;
+        }
+        if (modificaUser.password==="" && modificaUser.email==="" && modificaUser.username===""){
+            dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
+            return;
         }
     };
 
