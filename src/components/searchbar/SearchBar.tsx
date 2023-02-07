@@ -59,7 +59,6 @@ function SearchBar () {
             return;
         }
         dispatch(audiolibroAction.ricercaAudiolibro(campiRicerca));
-        console.log('<<',campiRicerca);
     }
 
     // serve per salvare la data di creazione che seleziona l'utente

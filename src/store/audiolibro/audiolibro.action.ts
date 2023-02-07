@@ -124,7 +124,6 @@ const modificaAudiolibroAction=createAsyncThunk(
     '/modificaAudiolibro',
     async (requestAudiolibroModifica:RequestAudiolibroModificaCampi,thunkAPI):Promise<ResponseAudiolibro>=>{
         try {
-            debugger
             const response = await modificaAudiolibro(requestAudiolibroModifica);
             thunkAPI.dispatch(toastActions.showToast({message: 'Audiolibro modificato con successo', type: ToastType.SUCCESS}));
             thunkAPI.dispatch(getAudiobooksbyUserList());

@@ -99,7 +99,6 @@ function ModificaAudiolibro (props:ModificaAudiolibroProps) {
 
                             <div className="d-grid gap-2 mt-3">
                                 <Button  type="submit" className="btn btn-primary" variant="warning" onClick={async() => {
-                                    debugger;
                                     if(audiobookModifica.titolo==='' && audiobookModifica.descrizione==='' && audiobookModifica.copertina===''){
                                         dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
                                     }else{

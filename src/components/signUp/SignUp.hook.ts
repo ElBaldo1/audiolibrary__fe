@@ -27,7 +27,8 @@ export const useSignup = (dto?: RequestUtenteRegistrazione) => {
             } catch (e) {
                 const {response} = e as AxiosError;
                 if (response && response.data) {
-                    dispatch(toastActions.showToast({message: response?.data, type: ToastType.ERROR}));
+                    console.log(response);
+                    dispatch(toastActions.showToast({message:  response?.data, type: ToastType.ERROR}));
                 }
             } finally {
                 setIsLoading(false);

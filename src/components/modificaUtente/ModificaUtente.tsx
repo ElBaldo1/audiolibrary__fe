@@ -32,7 +32,7 @@ function ModificaUtente () {
             dispatch(toastActions.showToast({message: 'Password non corrispondono', type: ToastType.ERROR}));
             return;
         }
-        if(modificaUser.email!=="" && !regexEmail(modificaUser.email)){
+        if(modificaUser.email!=="" && (!regexEmail(modificaUser.email) || modificaUser.email==="")) {
             dispatch(toastActions.showToast({message: 'Email non valida', type: ToastType.ERROR}));
             return;
         }
@@ -57,7 +57,6 @@ function ModificaUtente () {
     };
 
     const dispatchModificaUtente = async () => {
-        debugger
         if (pageType===PageType.FAVOURITEPAGE){
             await dispatch(audiolibroAction.getFavuoritesAudiobookByUserList);
         }
@@ -70,7 +69,7 @@ function ModificaUtente () {
 
     return (
         <>
-            <div style={{marginLeft:'47%', position:'absolute',marginTop:'7%'}}><Back  onClick={()=>navigate('/home')} /> </div>
+            <div style={{marginLeft:'47%', position:'absolute',marginTop:'6%'}}><Back  onClick={()=>navigate('/home')} /> </div>
             <div data-testid='popupLogout' className="Auth-form-container">
                 <div className="Auth-form">
                     <div className="Auth-form-content">
@@ -94,6 +93,13 @@ function ModificaUtente () {
 
                         <div className="form-group mt-3">
                             <label>Password</label>
+                            <p>Rispettare i seguenti criteri:</p>
+                            <ul>
+                                <li>Almeno 8 caratteri</li>
+                                <li>Almeno una lettera</li>
+                                <li>Almeno un numero</li>
+                                <li>Almeno un carattere speciale</li>
+                            </ul>
                             <input
                                 type="password"
                                 className="form-control"

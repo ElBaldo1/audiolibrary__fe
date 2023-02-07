@@ -114,6 +114,13 @@ function SignUp () {
 
                     <div className="form-group mt-3">
                         <label>Password</label>
+                        <p>Rispettare i seguenti criteri:</p>
+                        <ul>
+                            <li>Almeno 8 caratteri</li>
+                            <li>Almeno una lettera</li>
+                            <li>Almeno un numero</li>
+                            <li>Almeno un carattere speciale</li>
+                        </ul>
                         <input
                             type="password"
                             className="form-control"
