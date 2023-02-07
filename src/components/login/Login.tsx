@@ -66,7 +66,6 @@ function Login () {
                     </div>
                     <div className="d-grid gap-2 mt-3">
                         <Button type="submit" className="btn btn-primary" variant="warning"  onClick={async()=>{
-                            //todo chiamata al be aggiungere async await
                             const credentials: RequestUtenteLogin = {
                                 username,
                                 password

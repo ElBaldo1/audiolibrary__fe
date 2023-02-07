@@ -14,7 +14,8 @@ const loginUser = createAsyncThunk(
     '/login',
     async (requestUtenteLogin: RequestUtenteLogin, thunkAPI): Promise<ResponseUtenteLogin | undefined> => {
         if (!utenteLoginController(requestUtenteLogin)) {
-            alert("controllo fe non superato");
+            thunkAPI.dispatch(toastActions.showToast({message: 'Username o password non validi', type: ToastType.ERROR}));
+            return;
         }
         try {
             const response = await utente_login(requestUtenteLogin);
