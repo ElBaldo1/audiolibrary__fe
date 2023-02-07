@@ -277,11 +277,12 @@ export const audiolibroReducer = {
             .addCase(audiolibroAction.modificaAudiolibroAction.fulfilled, (state, action) => {
                 const audioBooks = state.audioBooks.map((item) => {
                     if(item.idAudiolibro === action.payload.idAudiolibro){
+                        const c= action.payload.copertina.includes('data:image/png;base64,') ? action.payload.copertina : 'data:image/png;base64,' + action.payload.copertina;
                         return {
                             ...item,
                             titolo: action.payload.titolo,
                             descrizione: action.payload.descrizione,
-                            copertina: 'data:image/png;base64,' + action.payload.copertina,
+                            copertina: c,
                         }
                     }
                     return item

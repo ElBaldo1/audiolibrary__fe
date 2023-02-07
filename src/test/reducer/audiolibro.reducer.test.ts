@@ -1634,5 +1634,109 @@ describe('AudiolibroReducer', () => {
             payload: newAudiolibro
         })).toEqual(expectedState);
     });
+
+    //test modificaAudiolibro
+    //pending
+    test('it should return state with loading true when an user modify an audiobook', () => {
+
+            const ultimoAscolto: ResponseAscolto = {
+                data: '2021-05-05',
+                secondi: 100,
+            }
+
+            const creatore: ResponseUtente = {
+                nome: 'nome',
+                cognome: 'cognome',
+                username: 'username',
+            }
+
+            const audioBooksInitial: ResponseAudiolibro[] = [
+                {
+                    idAudiolibro: 1,
+                    preferito: true,
+                    pubblico: false,
+                    titolo: 'titolo',
+                    descrizione: 'descrizione',
+                    copertina: 'copertina',
+                    audio: 'audio',
+                    dataInserimento: 'dataInserimento',
+                    creatore: creatore,
+                    ultimoAscolto: ultimoAscolto,
+                }
+            ]
+            const audioBooksPreloaded: ResponseAudiolibro[] = audioBooksInitial.map((item) => {
+                return {
+                    ...item,
+                    copertina: 'data:image/png;base64,' + item.copertina,
+                    audio: 'data:audio/mp3;base64,' + item.audio
+                }
+            })
+            const initialState: PagesState = {
+                audioBooks: audioBooksPreloaded,
+                loading: false,
+                page: PageType.HOMEPAGE
+            }
+            const expectedState: PagesState = {
+                ...initialState,
+                loading: true
+            }
+            expect(audiolibroReducer.pages(initialState, {type: audiolibroAction.modificaAudiolibroAction.pending.type})).toEqual(expectedState);
+    })
+    //fullfilled
+    test('it should return a list of audiobooks with one audiobook updated when an user modify an audiobook', () => {
+
+            const ultimoAscolto: ResponseAscolto = {
+                data: '2021-05-05',
+                secondi: 100,
+            }
+
+            const creatore: ResponseUtente = {
+                nome: 'nome',
+                cognome: 'cognome',
+                username: 'username',
+            }
+
+            const audioBooksInitial: ResponseAudiolibro[] = [
+                {
+                    idAudiolibro: 1,
+                    preferito: true,
+                    pubblico: false,
+                    titolo: 'titolo',
+                    descrizione: 'descrizione',
+                    copertina: 'copertina',
+                    audio: 'audio',
+                    dataInserimento: 'dataInserimento',
+                    creatore: creatore,
+                    ultimoAscolto: ultimoAscolto,
+                }
+            ]
+            const audioBooksPreloaded: ResponseAudiolibro[] = audioBooksInitial.map((item) => {
+                return {
+                    ...item,
+                    copertina: 'data:image/png;base64,' + item.copertina,
+                    audio: 'data:audio/mp3;base64,' + item.audio
+                }
+            })
+            const initialState: PagesState = {
+                audioBooks: audioBooksPreloaded,
+                loading: false,
+                page: PageType.HOMEPAGE
+            }
+            const newAudiolibro: ResponseAudiolibro = {
+                ...audioBooksPreloaded[0],
+                titolo: 'titolo2',
+                descrizione: 'descrizione2',
+            }
+
+            const expectedState: PagesState = {
+                ...initialState,
+                audioBooks: [newAudiolibro]
+            }
+
+            expect(audiolibroReducer.pages(initialState, {
+                type: audiolibroAction.modificaAudiolibroAction.fulfilled.type,
+                payload: newAudiolibro
+            })).toEqual(expectedState);
+    })
 })
 

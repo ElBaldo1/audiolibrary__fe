@@ -118,4 +118,59 @@ test('should return initial state', () => {
             expect(authReducer.auth(initialState, {type: authAction.logoutUser.fulfilled.type})).toEqual(expectedState)
         }   )
 
+    //modifica user
+        //pending
+        test('should call modifica user method and return state with loading true', () => {
+            const initialState: AuthState = {
+                responseUtenteLogin: undefined,
+                loading: false,
+                error: false
+            }
+            const expectedState: AuthState = {
+                ...initialState,
+                loading: true,
+                error: false
+            }
+            expect(authReducer.auth(initialState, {type: authAction.modificaUser.pending.type})).toEqual(expectedState)
+        })
+
+        //rejected
+        test('should call modifica user method and return state with error true', () => {
+            const initialState: AuthState = {
+                responseUtenteLogin: undefined,
+                loading: false,
+                error: false
+            }
+            const expectedState: AuthState = {
+                ...initialState,
+                error: true,
+                loading: false
+            }
+            expect(authReducer.auth(initialState, {type: authAction.modificaUser.rejected.type})).toEqual(expectedState)
+        })
+
+        //fulfilled
+        test('should call modifica user method and return state with responseUtenteLogin', () => {
+            const responseUtenteLogin:ResponseUtenteLogin = {
+                jwtToken: 'token',
+                utente: {
+                    nome: 'nome',
+                    cognome: 'cognome',
+                    username: 'username',
+                }
+            }
+
+            const initialState: AuthState = {
+                responseUtenteLogin: responseUtenteLogin,
+                loading: false,
+                error: false
+            }
+
+            const expectedState: AuthState = {
+                ...initialState,
+                responseUtenteLogin: responseUtenteLogin,
+            }
+            expect(authReducer.auth(initialState, {type: authAction.modificaUser.fulfilled.type, payload:responseUtenteLogin })).toEqual(expectedState)
+        })
+
 })
