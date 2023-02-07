@@ -28,6 +28,10 @@ function ModificaUtente () {
 
 
     const onClickModify = async () => {
+        if(modificaUser.email!=="" && (!regexEmail(modificaUser.email) || modificaUser.email==="")) {
+            dispatch(toastActions.showToast({message: 'Email non valida', type: ToastType.ERROR}));
+            return;
+        }
         if (modificaUser.password!=="" && modificaUser.password !== confirmPassword) {
             dispatch(toastActions.showToast({message: 'Password non corrispondono', type: ToastType.ERROR}));
             return;
@@ -37,10 +41,7 @@ function ModificaUtente () {
             await dispatchModificaUtente();
             return;
         }
-        if(modificaUser.email!=="" && (!regexEmail(modificaUser.email) || modificaUser.email==="")) {
-            dispatch(toastActions.showToast({message: 'Email non valida', type: ToastType.ERROR}));
-            return;
-        }
+
         if (modificaUser.password === confirmPassword && regexEmail(modificaUser.email)) {
               dispatch(authAction.modificaUser(modificaUser));
             await dispatchModificaUtente();
