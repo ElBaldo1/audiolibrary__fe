@@ -32,18 +32,23 @@ function ModificaUtente () {
             dispatch(toastActions.showToast({message: 'Password non corrispondono', type: ToastType.ERROR}));
             return;
         }
+        if(modificaUser.email==="" && modificaUser.password===confirmPassword){
+            dispatch(authAction.modificaUser(modificaUser));
+            await dispatchModificaUtente();
+            return;
+        }
         if(modificaUser.email!=="" && (!regexEmail(modificaUser.email) || modificaUser.email==="")) {
             dispatch(toastActions.showToast({message: 'Email non valida', type: ToastType.ERROR}));
             return;
         }
         if (modificaUser.password === confirmPassword && regexEmail(modificaUser.email)) {
-             await dispatch(authAction.modificaUser(modificaUser));
+              dispatch(authAction.modificaUser(modificaUser));
             await dispatchModificaUtente();
             return;
         }
 
         if (modificaUser.password==="" && modificaUser.email===""){
-             await dispatch(authAction.modificaUser(modificaUser));
+              dispatch(authAction.modificaUser(modificaUser));
             await dispatchModificaUtente();
             return;
         }
@@ -51,7 +56,7 @@ function ModificaUtente () {
             await dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
             return;
         }
-         await dispatch(audiolibroAction.getAudiobooksbyUserList());
+          dispatch(audiolibroAction.getAudiobooksbyUserList());
         await dispatchModificaUtente();
 
     };
