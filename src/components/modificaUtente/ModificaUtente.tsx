@@ -70,6 +70,7 @@ function ModificaUtente () {
         } else {
             await dispatch(audiolibroAction.getAudiobooksbyUserList);
         }
+        navigate('/home');
     }
 
     return (
