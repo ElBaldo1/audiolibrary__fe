@@ -34,7 +34,7 @@ function ModificaUtente () {
             return;
         }
         if(modificaUser.email==="" && modificaUser.password===confirmPassword){
-             dispatch(authAction.modificaUser(modificaUser));
+            dispatch(toastActions.showToast({message: 'Email o password non validi', type: ToastType.ERROR}));
             await dispatchModificaUtente();
             return;
         }
@@ -70,9 +70,6 @@ function ModificaUtente () {
             await dispatch(audiolibroAction.getPublicAudiobookList);
         } else {
             await dispatch(audiolibroAction.getAudiobooksbyUserList);
-        }
-        if (!isLoading && !isError) {
-            navigate('/home');
         }
     }
 

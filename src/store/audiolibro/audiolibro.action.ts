@@ -130,8 +130,7 @@ const modificaAudiolibroAction=createAsyncThunk(
             return response.data;
         }   catch (e) {
             const error = e as AxiosError;
-            //todo gestire errore
-            thunkAPI.dispatch(toastActions.showToast({message: error.message + error.response?.data , type: ToastType.ERROR}));
+            thunkAPI.dispatch(toastActions.showToast({message: error.response?.data , type: ToastType.ERROR}));
             throw e;
         }
     }
