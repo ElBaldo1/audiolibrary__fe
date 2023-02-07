@@ -18,7 +18,6 @@ import {ToastType} from 'store/toastr/types';
 function ModificaUtente () {
     const dispatch = useAppDispatch();
     const isLoading=useSelector(authSelector.loading);
-    const isError=useSelector(authSelector.error);
     const pageType= useSelector(audiolibroSelector.page);
     const navigate=useNavigate();
     const [modificaUser, setModificaUser] = useState<RequestUtenteModifica>({
@@ -49,7 +48,7 @@ function ModificaUtente () {
         }
 
         if (modificaUser.password==="" && modificaUser.email===""){
-               dispatch(authAction.modificaUser(modificaUser));
+            dispatch(toastActions.showToast({message: 'Email o password non validi', type: ToastType.ERROR}));
             await dispatchModificaUtente();
             return;
         }
@@ -57,7 +56,7 @@ function ModificaUtente () {
              dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
             return;
         }
-          dispatch(audiolibroAction.getAudiobooksbyUserList());
+        dispatch(audiolibroAction.getAudiobooksbyUserList());
         await dispatchModificaUtente();
 
     };
