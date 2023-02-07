@@ -69,7 +69,7 @@ function ModificaUtente () {
 
     return (
         <>
-            <div style={{marginLeft:'47%', position:'absolute',marginTop:'6%'}}><Back  onClick={()=>navigate('/home')} /> </div>
+            <div style={{marginLeft:'47%', position:'absolute',marginTop:'2%'}}><Back  onClick={()=>navigate('/home')} /> </div>
             <div data-testid='popupLogout' className="Auth-form-container">
                 <div className="Auth-form">
                     <div className="Auth-form-content">

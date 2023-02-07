@@ -58,7 +58,7 @@ function ModificaAudiolibro (props:ModificaAudiolibroProps) {
     return (
         (!checkAuth) ? <></> :
             <>
-                <div style={{marginLeft:'47%', position:'absolute',marginTop:'8%'}}><Back  onClick={() => back(false)} /> </div>
+                <div style={{marginLeft:'47%', position:'absolute',marginTop:'2%'}}><Back  onClick={() => back(false)} /> </div>
                 <div data-testid='formModificaAudiolibro' className="Auth-form-container ">
                     <form className="Auth-form">
                         <div className="Auth-form-content">
