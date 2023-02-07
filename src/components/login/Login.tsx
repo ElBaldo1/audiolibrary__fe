@@ -45,7 +45,7 @@ function Login () {
                     <div className="form-group mt-3">
                         <label>Username</label>
                         <input
-                            type="email"
+                            type="text"
                             className="form-control mt-1"
                             placeholder="Inserire Username"
                             onChange={(e) => setUsername(e.target.value)}
