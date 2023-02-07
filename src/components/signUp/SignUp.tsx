@@ -1,4 +1,3 @@
-import {utenteRegistrazioneController} from 'components/signUp/SignUp.controller';
 import {useSignup} from 'components/signUp/SignUp.hook';
 import {RequestUtenteRegistrazione} from 'model/requestDTO';
 import React, {useEffect, useState} from 'react';
@@ -33,7 +32,7 @@ function SignUp () {
         if (newUser.password === confirmPassword) {
             if (regexEmail(newUser.email)) {
                 // qui chiamata al controller FE
-                if(utenteRegistrazioneController(newUser)) {
+                if(utenteRegistrazioneControllerDispatch(newUser)) {
                     setRequestUtenteRegistrazione(newUser)
                 }
             } else {
@@ -43,6 +42,25 @@ function SignUp () {
             dispatch(toastActions.showToast({message: 'Password non corrispondono', type: ToastType.ERROR}));
         }
     };
+
+
+    const utenteRegistrazioneControllerDispatch=(requestUtenteRegistrazione:RequestUtenteRegistrazione)=>{
+        let correct=true;
+        if(requestUtenteRegistrazione.email==='' || requestUtenteRegistrazione.nome==='' || requestUtenteRegistrazione.cognome==='' || requestUtenteRegistrazione.username==='' || requestUtenteRegistrazione.password===''){
+            correct=false;
+            dispatch(toastActions.showToast({message: 'Compila tutti i campi', type: ToastType.ERROR}));
+        }
+        if(requestUtenteRegistrazione.email==null || requestUtenteRegistrazione.nome==null || requestUtenteRegistrazione.cognome==null || requestUtenteRegistrazione.username==null || requestUtenteRegistrazione.password==null){
+            correct=false;
+            dispatch(toastActions.showToast({message: 'Compila tutti i campi', type: ToastType.ERROR}));
+        }
+        if (!regexEmail(requestUtenteRegistrazione.email)){
+            correct=false;
+            dispatch(toastActions.showToast({message: 'Email non valida', type: ToastType.ERROR}));
+        }
+
+        return correct;
+    }
 
     return (
         <div data-testid='popupLogout' className="Auth-form-container">

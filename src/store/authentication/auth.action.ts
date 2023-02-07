@@ -58,7 +58,7 @@ const modificaUser= createAsyncThunk(
             return response.data;
         } catch (e) {
             const error = e as AxiosError;
-            thunkAPI.dispatch(toastActions.showToast({message: error.message, type: ToastType.ERROR}));
+            thunkAPI.dispatch(toastActions.showToast({message: error.response?.data, type: ToastType.ERROR}));
             throw e;
         }
     }

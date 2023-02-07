@@ -18,6 +18,7 @@ import {ToastType} from 'store/toastr/types';
 function ModificaUtente () {
     const dispatch = useAppDispatch();
     const isLoading=useSelector(authSelector.loading);
+    const isError=useSelector(authSelector.error);
     const pageType= useSelector(audiolibroSelector.page);
     const navigate=useNavigate();
     const [modificaUser, setModificaUser] = useState<RequestUtenteModifica>({
@@ -33,7 +34,7 @@ function ModificaUtente () {
             return;
         }
         if(modificaUser.email==="" && modificaUser.password===confirmPassword){
-            dispatch(authAction.modificaUser(modificaUser));
+             dispatch(authAction.modificaUser(modificaUser));
             await dispatchModificaUtente();
             return;
         }
@@ -48,12 +49,12 @@ function ModificaUtente () {
         }
 
         if (modificaUser.password==="" && modificaUser.email===""){
-              dispatch(authAction.modificaUser(modificaUser));
+               dispatch(authAction.modificaUser(modificaUser));
             await dispatchModificaUtente();
             return;
         }
         if (modificaUser.password==="" && modificaUser.email===""){
-            await dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
+             dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
             return;
         }
           dispatch(audiolibroAction.getAudiobooksbyUserList());
@@ -70,7 +71,9 @@ function ModificaUtente () {
         } else {
             await dispatch(audiolibroAction.getAudiobooksbyUserList);
         }
-        navigate('/home');
+        if (!isLoading && !isError) {
+            navigate('/home');
+        }
     }
 
     return (
