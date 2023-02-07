@@ -37,7 +37,7 @@ function ModificaUtente () {
             return;
         }
         if(modificaUser.email==="" && modificaUser.password===confirmPassword){
-            dispatch(toastActions.showToast({message: 'Email o password non validi', type: ToastType.ERROR}));
+            dispatch(authAction.modificaUser(modificaUser));
             await dispatchModificaUtente();
             return;
         }
@@ -48,11 +48,6 @@ function ModificaUtente () {
             return;
         }
 
-        if (modificaUser.password==="" && modificaUser.email===""){
-            dispatch(toastActions.showToast({message: 'Email o password non validi', type: ToastType.ERROR}));
-            await dispatchModificaUtente();
-            return;
-        }
         if (modificaUser.password==="" && modificaUser.email===""){
              dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
             return;

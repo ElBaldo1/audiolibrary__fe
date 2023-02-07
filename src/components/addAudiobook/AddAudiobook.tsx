@@ -113,30 +113,33 @@ function AddAudiobook () {
                     </div>
                     <div className="form-group mt-3">
                         <label>Copertina</label>
+                        <p>Estensioni file accettate: PNG e JPEG</p>
                         <input
                             type="file"
                             className="form-control"
                             placeholder="Copertina"
                             required={true}
                             onChange={onChangeImg}
+                            accept={'image/jpeg, image/png , image/jpg'}
                         />
                     </div>
                     <div className="form-group mt-3">
                         <label>Audio</label>
+                        <p>Estensioni file accettate: MP3 e WAV</p>
                         <input
                             type="file"
                             className="form-control"
                             placeholder="Audio"
                             required={true}
                             onChange={onChangeAudio}
+                            accept={'audio/mp3 , audio/mpeg , audio/wav'}
                         />
                     </div>
                     <div className="d-grid gap-2 mt-3">
-                        <Button  type="submit" className="btn btn-primary" variant="warning" onClick={() => {
+                        <Button  type="button" className="btn btn-primary" variant="warning" onClick={() => {
                             if(addAudiolibroControllerDispatch(newAudiobook)) {
                                 dispatch(audiolibroAction.addNewAudiobook(newAudiobook))
                             }
-                            navigate('/home');
                         }}>Aggiungi</Button>
                     </div>
                     {loading && <Spinner animation="border" variant="warning"/>}

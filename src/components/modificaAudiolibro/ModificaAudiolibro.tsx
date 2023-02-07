@@ -14,6 +14,7 @@ import {useAppDispatch} from 'store/store.config';
 import {toastActions} from 'store/toastr/toast.action';
 import {ToastType} from 'store/toastr/types';
 
+
 export interface ModificaAudiolibroProps {
     audiobook: ResponseAudiolibro;
     back: (arg: boolean) => void;
@@ -38,7 +39,7 @@ function ModificaAudiolibro (props:ModificaAudiolibroProps) {
         idAudiolibro:audiobook.idAudiolibro,
         titolo: '',
         descrizione: '',
-        copertina: ''
+        copertina: '',
     });
 
     const onChangeImg = (e: { target: { files: any; }; }) => {
@@ -78,6 +79,7 @@ function ModificaAudiolibro (props:ModificaAudiolibroProps) {
                             </div>
                             <div className="form-group mt-3">
                                 <label>Descrizione</label>
+                                <p>Estensioni file accettate: PNG e JPEG</p>
                                 <input
                                     type="text"
                                     className="form-control"
@@ -94,18 +96,21 @@ function ModificaAudiolibro (props:ModificaAudiolibroProps) {
                                     type="file"
                                     className="form-control"
                                     onChange={onChangeImg}
+                                    accept={'image/jpeg, image/png'}
                                 />
                             </div>
 
                             <div className="d-grid gap-2 mt-3">
-                                <Button  type="submit" className="btn btn-primary" variant="warning" onClick={() => {
-                                    if(audiobookModifica.titolo==='' && audiobookModifica.descrizione==='' && audiobookModifica.copertina===''){
-                                        dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
-                                    }else{
-                                         dispatch(audiolibroAction.modificaAudiolibroAction(audiobookModifica))
+                                <Button  type="button" className="btn btn-primary" variant="warning" onClick={() => {
+                                    // if some field is not empty, then dispatch the action
+                                    if (audiobookModifica.titolo !== '' || audiobookModifica.descrizione !== '' || audiobookModifica.copertina !== '') {
+                                        dispatch(audiolibroAction.modificaAudiolibroAction(audiobookModifica));
+                                    }else {
+                                        dispatch(toastActions.showToast({ message: 'Inserire almeno un campo', type: ToastType.ERROR }));
                                     }
-                                    navigate('/home');
-                                }}>Modifica</Button>
+                                    console.log(audiobookModifica);
+                                }
+                                }>Modifica</Button>
                             </div>
                             {loading && <Spinner animation="border" variant="warning"/>}
                         </div>
