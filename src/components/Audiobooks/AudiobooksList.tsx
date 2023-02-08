@@ -75,7 +75,6 @@ function AudiobooksList () {
             const dto: RequestAudiolibroModifica = {
                 idAudiolibro: audiobooksSelected.idAudiolibro
             }
-            //todo vedere i favoriti appena ggiounge il campo
             if (!audiobooksSelected.preferito) {
                 return <Button variant="secondary" size="lg"
                                onClick={() => dispatch(audiolibroAction.aggiungiAudiolibroPreferito(dto))}> Aggiungi

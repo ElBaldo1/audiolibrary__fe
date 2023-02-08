@@ -180,7 +180,6 @@ export const audiolibroReducer = {
                 }
             })
             .addCase(audiolibroAction.aggiungiAudiolibroPreferito.fulfilled, (state, action) => {
-                // todo cosa dei preferiti
                 const audioBooks = state.audioBooks.map((item) => {
                     if(item.idAudiolibro === action.payload.idAudiolibro){
                         return {

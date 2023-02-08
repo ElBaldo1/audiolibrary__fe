@@ -27,9 +27,6 @@ function AudioBooksDetails (props: AudioBooksDetailsProps) {
     }, [])
 
     const {audiobook} = props;
-    //todo fare con src vero/**/
-
-
 
     return (
         (!checkAuth) ? <></> :

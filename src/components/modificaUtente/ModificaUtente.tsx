@@ -36,7 +36,7 @@ function ModificaUtente () {
             dispatch(toastActions.showToast({message: 'Password non corrispondono', type: ToastType.ERROR}));
             return;
         }
-        if(modificaUser.email==="" && modificaUser.password===confirmPassword){
+        if(modificaUser.email==="" && modificaUser.password===confirmPassword && confirmPassword!==""){
             dispatch(authAction.modificaUser(modificaUser));
             await dispatchModificaUtente();
             return;
@@ -48,8 +48,12 @@ function ModificaUtente () {
             return;
         }
 
-        if (modificaUser.password==="" && modificaUser.email===""){
+        if (modificaUser.password==="" && modificaUser.email==="" && confirmPassword===""){
              dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
+            return;
+        }
+        if (modificaUser.password==="" && modificaUser.email==="" && confirmPassword!==""){
+            dispatch(toastActions.showToast({message: 'La mail non è valida e le password non corrispondono', type: ToastType.ERROR}));
             return;
         }
         dispatch(audiolibroAction.getAudiobooksbyUserList());
