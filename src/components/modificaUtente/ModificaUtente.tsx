@@ -60,7 +60,7 @@ function ModificaUtente() {
             return;
         }
         if (modificaUser.password !== "" || modificaUser.email !== "") {
-            dispatch(audiolibroAction.getAudiobooksbyUserList());
+            await dispatch(audiolibroAction.getAudiobooksbyUserList());
             await dispatchModificaUtente();
         }
     };

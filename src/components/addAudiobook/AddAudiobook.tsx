@@ -156,11 +156,15 @@ function AddAudiobook () {
                         />
                     </div>
                     <div className="d-grid gap-2 mt-3">
-                        <Button  type="button" className="btn btn-primary" variant="warning" onClick={() => {
+                        <Button  type="button" className="btn btn-primary" variant="warning" onClick={async () => {
                             if(addAudiolibroControllerDispatch(newAudiobook)) {
-                                dispatch(audiolibroAction.addNewAudiobook(newAudiobook))
+                                try {
+                                    await dispatch(audiolibroAction.addNewAudiobook(newAudiobook))
+                                    navigate('/home');
+                                }catch (e) {
+                                    console.log(e)
                             }
-                        }}>Aggiungi</Button>
+                        }}}>Aggiungi</Button>
                     </div>
                     {loading && <Spinner animation="border" variant="warning"/>}
                     <div className="mt-3">
