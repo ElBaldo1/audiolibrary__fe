@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {Spinner} from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import {Link, useNavigate} from 'react-router-dom';
+import {authAction} from 'store/authentication/auth.action';
 import {regexEmail} from 'store/authentication/auth.controller';
 import {useAppDispatch} from 'store/store.config';
 import {toastActions} from 'store/toastr/toast.action';
@@ -22,6 +23,15 @@ function SignUp () {
     });
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [isLoading, data] = useSignup(requestUtenteRegistrazione);
+
+    // qui pulisco il local storage da vecchi token
+    useEffect(()    => {
+        window.localStorage.clear();
+        //elimina utente in store
+        dispatch(authAction.clearUserLogged());
+    }   , []);
+
+
     useEffect(() => {
         if (data) {
             navigate('/login');

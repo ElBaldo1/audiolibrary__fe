@@ -18,7 +18,7 @@ function Login () {
     // qui pulisco il local storage da vecchi token
     useEffect(()    => {
         window.localStorage.clear();
-        //delete the element in the store
+        //elimina utente in store
         dispatch(authAction.clearUserLogged());
     }   , []);
 

@@ -117,7 +117,6 @@ function ModificaAudiolibro (props:ModificaAudiolibroProps) {
                                     }else {
                                         dispatch(toastActions.showToast({ message: 'Inserire almeno un campo', type: ToastType.ERROR }));
                                     }
-                                    console.log(audiobookModifica);
                                 }
                                 }>Modifica</Button>
                             </div>

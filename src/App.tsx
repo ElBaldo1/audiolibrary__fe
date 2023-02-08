@@ -4,11 +4,12 @@ import ModificaUtente from 'components/modificaUtente/ModificaUtente';
 import PageBooks from 'components/pageBooks/PageBooks';
 import SignUp from 'components/signUp/SignUp';
 import React from 'react';
+import {useSelector} from 'react-redux';
 import { Route,Routes} from 'react-router-dom';
 import './App.css';
+import {authSelector} from 'store/authentication/auth.selector';
 
 function App() {
-
     // qui viene gestito il routing dell'applicazione
     return (
         <>

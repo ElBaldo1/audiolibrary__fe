@@ -38,9 +38,6 @@ function AddAudiobook () {
 
     // funzione per il caricamento dell'immagine di copertina
     const onChangeImg = (e: { target: { files: any; }; }) => {
-        console.log('wewe',e.target.files)
-        debugger
-
         const files = e.target.files;
         const file = files[0];
         if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
