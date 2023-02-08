@@ -38,7 +38,12 @@ function AddAudiobook () {
 
     // funzione per il caricamento dell'immagine di copertina
     const onChangeImg = (e: { target: { files: any; }; }) => {
-        if (e.target.files.type !== 'image/jpeg' && e.target.files.type !== 'image/png') {
+        console.log('wewe',e.target.files)
+        debugger
+
+        const files = e.target.files;
+        const file = files[0];
+        if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
             dispatch(toastActions.showToast({
                 title: 'Errore',
                 message: 'Il formato della copertina deve essere .jpg o .png',
@@ -46,13 +51,12 @@ function AddAudiobook () {
             }));
             return;
         }
-        const files = e.target.files;
-        const file = files[0];
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
             const str=reader.result as string;
             const res = str.split("base64,");
+            console.log('res',res)
             setNewAudiobook({...newAudiobook, copertina: res[1]});
         };
     };
@@ -60,7 +64,9 @@ function AddAudiobook () {
 
     // funzione per il caricamento del file audio
     const onChangeAudio = (e: { target: { files: any }; }) => {
-        if (e.target.files.type !== 'audio/mpeg' && e.target.files.type !== 'audio/wav') {
+        const files = e.target.files;
+        const file = files[0];
+        if (file.type !== 'audio/mpeg' && file.type !== 'audio/wav') {
             dispatch(toastActions.showToast({
                 title: 'Errore',
                 message: 'Il formato audio deve essere .mp3 o .wav',
@@ -68,8 +74,6 @@ function AddAudiobook () {
             }));
             return;
         }
-        const files = e.target.files;
-        const file = files[0];
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
