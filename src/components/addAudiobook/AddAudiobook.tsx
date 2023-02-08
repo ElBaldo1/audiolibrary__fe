@@ -38,6 +38,14 @@ function AddAudiobook () {
 
     // funzione per il caricamento dell'immagine di copertina
     const onChangeImg = (e: { target: { files: any; }; }) => {
+        if (e.target.files.type !== 'image/jpeg' && e.target.files.type !== 'image/png') {
+            dispatch(toastActions.showToast({
+                title: 'Errore',
+                message: 'Il formato immagine deve essere .jpg o .png',
+                type: ToastType.ERROR,
+            }));
+            return;
+        }
         const files = e.target.files;
         const file = files[0];
         let reader = new FileReader();
@@ -52,6 +60,14 @@ function AddAudiobook () {
 
     // funzione per il caricamento del file audio
     const onChangeAudio = (e: { target: { files: any }; }) => {
+        if (e.target.files.type !== 'audio/mpeg' && e.target.files.type !== 'audio/wav') {
+            dispatch(toastActions.showToast({
+                title: 'Errore',
+                message: 'Il formato audio deve essere .mp3 o .wav',
+                type: ToastType.ERROR,
+            }));
+            return;
+        }
         const files = e.target.files;
         const file = files[0];
         let reader = new FileReader();
