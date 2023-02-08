@@ -18,6 +18,8 @@ function Login () {
     // qui pulisco il local storage da vecchi token
     useEffect(()    => {
         window.localStorage.clear();
+        //delete the element in the store
+        dispatch(authAction.clearUserLogged());
     }   , []);
 
     const dispatch = useAppDispatch();

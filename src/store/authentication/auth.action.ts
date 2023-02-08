@@ -64,10 +64,18 @@ const modificaUser= createAsyncThunk(
     }
 )
 
+const clearUserLogged = createAsyncThunk(
+    '/clearUserLogged',
+    async (): Promise<void> => {
+        localStorage.removeItem('user');
+    }
+)
+
 
 
 export const authAction = {
     loginUser,
     logoutUser,
-    modificaUser
+    modificaUser,
+    clearUserLogged
 }

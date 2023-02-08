@@ -80,13 +80,35 @@ export const authReducer = {
                     }
                 )
                 .addCase(authAction.modificaUser.fulfilled, (state) => {
+                        return {
+                            ...state,
+                            loading: false,
+                            error: false
+                        }
+                    }
+                )
+                .addCase(authAction.clearUserLogged.rejected, (state) => {
                     return {
                         ...state,
+                        error: true,
+                        loading: false
+                    }
+                })
+                .addCase(authAction.clearUserLogged.pending, (state) => {
+                    return {
+                        ...state,
+                        loading: true,
+                        error: false
+                    }
+                })
+                .addCase(authAction.clearUserLogged.fulfilled, (state) => {
+                    return {
+                        ...state,
+                        responseUtenteLogin: undefined,
                         loading: false,
                         error: false
                     }
-                    }
-                )
+                })
         }
     )
 }
