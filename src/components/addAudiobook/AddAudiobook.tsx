@@ -41,7 +41,7 @@ function AddAudiobook () {
         if (e.target.files.type !== 'image/jpeg' && e.target.files.type !== 'image/png') {
             dispatch(toastActions.showToast({
                 title: 'Errore',
-                message: 'Il formato immagine deve essere .jpg o .png',
+                message: 'Il formato della copertina deve essere .jpg o .png',
                 type: ToastType.ERROR,
             }));
             return;
