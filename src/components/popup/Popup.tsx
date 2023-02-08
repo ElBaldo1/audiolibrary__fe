@@ -3,8 +3,10 @@ import {RequestUtenteLogout} from 'model/requestDTO';
 import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {authAction} from 'store/authentication/auth.action';
+import {authSelector} from 'store/authentication/auth.selector';
 import {useAppDispatch} from 'store/store.config';
 
 
@@ -16,6 +18,7 @@ function Popup() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const utente =useSelector(authSelector.userLogged)
     const linkToModificaUtente = () => {
         navigate('/modificaUtente');
     }
@@ -26,10 +29,9 @@ function Popup() {
             <Button data-testid='buttonLogout' variant="warning" onClick={handleShow}>
                 LOGOUT
             </Button>
-
             <Modal data-testid='popupLogout' show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Ciao Michele</Modal.Title>
+                    <Modal.Title>Ciao {utente?.username}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Sei sicuro di voler effettuare il logout?</Modal.Body>
                 <Modal.Footer>
