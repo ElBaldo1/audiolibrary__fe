@@ -45,6 +45,15 @@ function ModificaAudiolibro (props:ModificaAudiolibroProps) {
     const onChangeImg = (e: { target: { files: any; }; }) => {
         const files = e.target.files;
         const file = files[0];
+        if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
+            dispatch(toastActions.showToast({
+                title: 'Errore',
+                message: 'Il formato della copertina deve essere .jpg o .png',
+                type: ToastType.ERROR,
+            }));
+            setAudiobookModifica({...audiobookModifica, copertina: ''});
+            return;
+        }
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {

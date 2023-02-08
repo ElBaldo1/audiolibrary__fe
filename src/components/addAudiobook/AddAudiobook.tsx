@@ -49,6 +49,7 @@ function AddAudiobook () {
                 message: 'Il formato della copertina deve essere .jpg o .png',
                 type: ToastType.ERROR,
             }));
+            setNewAudiobook({...newAudiobook, copertina: ''});
             return;
         }
         let reader = new FileReader();
@@ -72,6 +73,8 @@ function AddAudiobook () {
                 message: 'Il formato audio deve essere .mp3 o .wav',
                 type: ToastType.ERROR,
             }));
+            setNewAudiobook({...newAudiobook, audio: ''});
+
             return;
         }
         let reader = new FileReader();
