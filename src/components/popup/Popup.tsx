@@ -3,10 +3,8 @@ import {RequestUtenteLogout} from 'model/requestDTO';
 import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {authAction} from 'store/authentication/auth.action';
-import {authSelector} from 'store/authentication/auth.selector';
 import {useAppDispatch} from 'store/store.config';
 
 
