@@ -40,13 +40,13 @@ function Popup () {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={()=>{
+                    <Button variant="primary" onClick={async ()=>{
                         handleClose();
                         let tokenUser:string =getToken();
                         const requestUtenteLogout:RequestUtenteLogout={
                             jwtToken:tokenUser
                         }
-                        dispatch(authAction.logoutUser(requestUtenteLogout));
+                        await dispatch(authAction.logoutUser(requestUtenteLogout));
                         if(!loading && !error){
                             navigate('/login');
                         }
