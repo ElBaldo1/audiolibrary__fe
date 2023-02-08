@@ -15,11 +15,11 @@ import {useAppDispatch} from 'store/store.config';
 import {toastActions} from 'store/toastr/toast.action';
 import {ToastType} from 'store/toastr/types';
 
-function ModificaUtente () {
+function ModificaUtente() {
     const dispatch = useAppDispatch();
-    const isLoading=useSelector(authSelector.loading);
-    const pageType= useSelector(audiolibroSelector.page);
-    const navigate=useNavigate();
+    const isLoading = useSelector(authSelector.loading);
+    const pageType = useSelector(audiolibroSelector.page);
+    const navigate = useNavigate();
     const [modificaUser, setModificaUser] = useState<RequestUtenteModifica>({
         email: '',
         password: ''
@@ -28,44 +28,47 @@ function ModificaUtente () {
 
 
     const onClickModify = async () => {
-        if(modificaUser.email!=="" && (!regexEmail(modificaUser.email) || modificaUser.email==="")) {
+        if (modificaUser.email !== "" && (!regexEmail(modificaUser.email) || modificaUser.email === "")) {
             dispatch(toastActions.showToast({message: 'Email non valida', type: ToastType.ERROR}));
             return;
         }
-        if (modificaUser.password!=="" && modificaUser.password !== confirmPassword) {
+        if (modificaUser.password !== "" && modificaUser.password !== confirmPassword) {
             dispatch(toastActions.showToast({message: 'Password non corrispondono', type: ToastType.ERROR}));
             return;
         }
-        if(modificaUser.email==="" && modificaUser.password===confirmPassword && confirmPassword!==""){
+        if (modificaUser.email === "" && modificaUser.password === confirmPassword && confirmPassword !== "") {
             dispatch(authAction.modificaUser(modificaUser));
             await dispatchModificaUtente();
             return;
         }
 
         if (modificaUser.password === confirmPassword && regexEmail(modificaUser.email)) {
-              dispatch(authAction.modificaUser(modificaUser));
+            dispatch(authAction.modificaUser(modificaUser));
             await dispatchModificaUtente();
             return;
         }
 
-        if (modificaUser.password==="" && modificaUser.email==="" && confirmPassword===""){
-             dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
+        if (modificaUser.password === "" && modificaUser.email === "" && confirmPassword === "") {
+            dispatch(toastActions.showToast({message: 'Inserire almeno un campo', type: ToastType.ERROR}));
             return;
         }
-        if (modificaUser.password==="" && modificaUser.email==="" && confirmPassword!==""){
-            dispatch(toastActions.showToast({message: 'La mail non è valida e le password non corrispondono', type: ToastType.ERROR}));
+        if (modificaUser.password === "" && modificaUser.email === "" && confirmPassword !== "") {
+            dispatch(toastActions.showToast({
+                message: 'La mail non è valida e le password non corrispondono',
+                type: ToastType.ERROR
+            }));
             return;
         }
-        dispatch(audiolibroAction.getAudiobooksbyUserList());
-        await dispatchModificaUtente();
-
+        if (modificaUser.password !== "" || modificaUser.email !== "") {
+            dispatch(audiolibroAction.getAudiobooksbyUserList());
+            await dispatchModificaUtente();
+        }
     };
 
     const dispatchModificaUtente = async () => {
-        if (pageType===PageType.FAVOURITEPAGE){
+        if (pageType === PageType.FAVOURITEPAGE) {
             await dispatch(audiolibroAction.getFavuoritesAudiobookByUserList);
-        }
-        else if (pageType===PageType.NETWORKPAGE){
+        } else if (pageType === PageType.NETWORKPAGE) {
             await dispatch(audiolibroAction.getPublicAudiobookList);
         } else {
             await dispatch(audiolibroAction.getAudiobooksbyUserList);
@@ -74,7 +77,8 @@ function ModificaUtente () {
 
     return (
         <>
-            <div style={{marginLeft:'47%', position:'absolute',marginTop:'2%'}}><Back  onClick={()=>navigate('/home')} /> </div>
+            <div style={{marginLeft: '47%', position: 'absolute', marginTop: '2%'}}><Back
+                onClick={() => navigate('/home')}/></div>
             <div data-testid='popupLogout' className="Auth-form-container">
                 <div className="Auth-form">
                     <div className="Auth-form-content">
