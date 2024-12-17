@@ -15,11 +15,12 @@ This app is designed for an immersive and personalized audio listening experienc
 2. [Installation](#installation)
 3. [Usage](#usage)
 4. [Technologies Used](#technologies-used)
-5. [Scripts](#scripts)
-6. [Dependencies](#dependencies)
-7. [Troubleshooting](#troubleshooting)
-8. [Contributors](#contributors)
-9. [License](#license)
+5. [Backend Repository](#backend-repository)
+6. [Scripts](#scripts)
+7. [Dependencies](#dependencies)
+8. [Troubleshooting](#troubleshooting)
+9. [Contributors](#contributors)
+10. [License](#license)
 
 ---
 
@@ -71,6 +72,14 @@ Ensure the following are installed on your system:
 
 ---
 
+## Backend Repository
+The backend for this project is developed using Node.js and can be found at:  
+🔗 **[AudioLibrary_BE](https://github.com/MikeLeg01/audiolibrary_be)**  
+
+Make sure to set up and run the backend server to enable full functionality.
+
+---
+
 ## Technologies Used
 - **React**: Front-end UI library.
 - **React Router DOM**: Navigation.
@@ -113,7 +122,7 @@ For the full list, check the [`package.json`](package.json) file.
 ## Troubleshooting
 - **Port Conflict**: If the app fails to start, ensure no other app is running on port 3000.
 - **Dependencies Error**: Run `npm install` to ensure all packages are correctly installed.
-- **Backend Connection**: Ensure API endpoints are up and running.
+- **Backend Connection**: Ensure the backend server is running at the correct port.
 
 ---
 
@@ -122,5 +131,13 @@ For the full list, check the [`package.json`](package.json) file.
 
 Feel free to fork the project, open issues, or submit pull requests.
 
+---
 
-  
+## License
+This project is licensed under the **MIT License**.
+
+---
+
+## Repository
+- **Frontend**: [AudioLibrary_FE](https://github.com/ElBaldo1/audiolibrary_fe)  
+- **Backend**: [AudioLibrary_BE](https://github.com/MikeLeg01/audiolibrary_be)
