@@ -1,28 +1,20 @@
 import React from 'react';
-import {createRoot} from 'react-dom/client';
-import {Provider} from 'react-redux';
-import {BrowserRouter} from 'react-router-dom';
-import store from 'store/store.config';
-import {Toastr} from 'components/toastr/toastr.component';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import './index.css';
+import { store } from './store';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+import './styles/global.css';
 
-
-// file di configurazione per react-redux
-const container = document.getElementById('root')!;
-const root = createRoot(container);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <BrowserRouter>
-                <Toastr/>
-                <App/>
-            </BrowserRouter>
-        </Provider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+      <ToastContainer position="bottom-right" newestOnTop closeOnClick pauseOnFocusLoss={false} />
+    </Provider>
+  </React.StrictMode>,
 );
-
-reportWebVitals();
